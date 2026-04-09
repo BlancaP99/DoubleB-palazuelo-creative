@@ -99,7 +99,7 @@
         .hero-title {
             font-family: 'Calivorne', serif;
             font-size: clamp(58px, 9vw, 150px);
-            font-weight: 700;
+            font-weight: 500;
             line-height: 0.92;
             letter-spacing: 0.10em;
             text-transform: uppercase;
@@ -274,7 +274,7 @@
         .section-title {
             font-family: 'Calivorne', serif;
             font-size: clamp(34px, 4vw, 60px);
-             font-weight: 700;
+             font-weight: 500;
             line-height: 1;
             letter-spacing: 0.06em;
             text-transform: uppercase;
@@ -436,6 +436,25 @@
         .form-error.is-visible {
             display: block;
         }
+
+
+        @media (max-width: 768px) {
+  body {
+    background: none !important;
+  }
+
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background-image: url('IMAGES/MOVIL_FONDO.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    pointer-events: none;
+  }
+}
 
         @media (max-width: 900px) {
             .profiles-grid {
