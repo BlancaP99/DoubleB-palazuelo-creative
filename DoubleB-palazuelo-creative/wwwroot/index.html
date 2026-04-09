@@ -1,0 +1,699 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOUBLE B</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+        @font-face {
+            font-family: 'Calivorne';
+            src: url('/FONTS/Poiret_One/calivorne.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        :root {
+            --main-text: #241b46;
+            --soft-text: #241b46;
+            --overlay-white: rgba(255, 255, 255, 0.30);
+            --card-bg: rgba(255, 255, 255, 0.34);
+            --card-border: rgba(36, 27, 70, 0.16);
+            --card-shadow: 0 14px 40px rgba(36, 27, 70, 0.08);
+            --field-bg: rgba(255, 255, 255, 0.42);
+            --field-border: rgba(36, 27, 70, 0.24);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            width: 100%;
+            min-height: 100%;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-image: url('/IMAGES/FONDO_2.jpg');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: var(--main-text);
+            font-family: 'Montserrat', sans-serif;
+            position: relative;
+        }
+
+            body::before {
+                content: "";
+                position: fixed;
+                inset: 0;
+                background: var(--overlay-white);
+                z-index: 0;
+                pointer-events: none;
+            }
+
+        .page-wrap {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 48px 24px;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 980px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero-top {
+            font-family: 'Calivorne', serif;
+            font-size: clamp(20px, 2vw, 34px);
+            line-height: 1.15;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--main-text);
+            margin-bottom: 16px;
+        }
+
+        .hero-title {
+            font-family: 'Calivorne', serif;
+            font-size: clamp(58px, 9vw, 150px);
+            line-height: 0.92;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--main-text);
+            margin-bottom: 18px;
+        }
+
+        .hero-bottom {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(15px, 1.15vw, 19px);
+            font-weight: 300;
+            line-height: 1.65;
+            color: var(--soft-text);
+            max-width: 760px;
+            text-transform: none;
+        }
+
+        .profiles-section,
+        .contact-section {
+            width: 100%;
+            padding: 40px 24px 80px;
+        }
+
+        .profiles-inner,
+        .contact-inner {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .profiles-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+            align-items: start;
+        }
+
+        .profile-card {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            box-shadow: var(--card-shadow);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 26px;
+            transition: transform 0.28s ease, box-shadow 0.28s ease, background 0.28s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .profile-card:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 18px 48px rgba(36, 27, 70, 0.12);
+                background: rgba(255, 255, 255, 0.42);
+            }
+
+        .profile-role {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--soft-text);
+            margin-bottom: 12px;
+        }
+
+        .profile-name {
+            font-family: 'Calivorne', serif;
+            font-size: clamp(30px, 2.7vw, 46px);
+            line-height: 1;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--main-text);
+            margin-bottom: 18px;
+        }
+
+        .preview-widget {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.52);
+            border: 1px solid rgba(36, 27, 70, 0.12);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.55);
+            margin-bottom: 18px;
+            overflow: hidden;
+        }
+
+        .preview-topbar {
+            width: 100%;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 0 14px;
+            border-bottom: 1px solid rgba(36, 27, 70, 0.10);
+            background: rgba(255, 255, 255, 0.48);
+        }
+
+        .preview-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(36, 27, 70, 0.32);
+            flex: 0 0 auto;
+        }
+
+        .preview-url {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 0.06em;
+            color: var(--soft-text);
+            margin-left: 6px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .preview-body {
+            padding: 20px 20px 18px;
+            min-height: 220px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .preview-brand {
+            font-family: 'Calivorne', serif;
+            font-size: clamp(28px, 2.1vw, 38px);
+            line-height: 1;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--main-text);
+            margin-bottom: 14px;
+        }
+
+        .preview-description {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 300;
+            line-height: 1.7;
+            color: var(--soft-text);
+            max-width: 92%;
+        }
+
+        .preview-footer {
+            margin-top: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .preview-tag,
+        .preview-enter {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--main-text);
+        }
+
+        .section-title {
+            font-family: 'Calivorne', serif;
+            font-size: clamp(34px, 4vw, 60px);
+            line-height: 1;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--main-text);
+            text-align: center;
+            margin-bottom: 18px;
+        }
+
+        .section-subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 15px;
+            font-weight: 300;
+            line-height: 1.7;
+            color: var(--soft-text);
+            text-align: center;
+            max-width: 760px;
+            margin: 0 auto 34px;
+        }
+
+        .contact-form-wrap {
+            max-width: 920px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.34);
+            border: 1px solid rgba(36, 27, 70, 0.16);
+            box-shadow: var(--card-shadow);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 34px 30px 30px;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-row {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--main-text);
+        }
+
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            border: 1px solid var(--field-border);
+            background: var(--field-bg);
+            color: var(--main-text);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 300;
+            padding: 14px 16px;
+            outline: none;
+            box-shadow: none;
+        }
+
+            .form-input::placeholder,
+            .form-textarea::placeholder {
+                color: rgba(36, 27, 70, 0.65);
+            }
+
+            .form-input:focus,
+            .form-textarea:focus {
+                border-color: var(--main-text);
+            }
+
+        .form-textarea {
+            min-height: 140px;
+            resize: vertical;
+            line-height: 1.6;
+        }
+
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px 18px;
+            padding-top: 4px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+            .checkbox-item input[type="checkbox"] {
+                margin-top: 2px;
+                accent-color: var(--main-text);
+                width: 15px;
+                height: 15px;
+                flex: 0 0 auto;
+            }
+
+            .checkbox-item label {
+                font-family: 'Montserrat', sans-serif;
+                font-size: 14px;
+                font-weight: 300;
+                line-height: 1.5;
+                color: var(--soft-text);
+                cursor: pointer;
+            }
+
+        .submit-wrap {
+            display: flex;
+            justify-content: center;
+            padding-top: 6px;
+        }
+
+        .submit-btn {
+            border: 1px solid rgba(36, 27, 70, 0.28);
+            background: rgba(255, 255, 255, 0.42);
+            color: var(--main-text);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            padding: 14px 28px;
+            cursor: pointer;
+            transition: background 0.25s ease, transform 0.25s ease;
+        }
+
+            .submit-btn:hover {
+                background: rgba(255, 255, 255, 0.62);
+                transform: translateY(-2px);
+            }
+
+        .door-transition {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        .door-left,
+        .door-right {
+            position: absolute;
+            top: 0;
+            width: 50%;
+            height: 100%;
+            background: rgba(36, 27, 70, 0.96);
+            transform: translateX(0);
+            transition: transform 0.7s ease;
+        }
+
+        .door-left {
+            left: 0;
+            transform: translateX(-100%);
+        }
+
+        .door-right {
+            right: 0;
+            transform: translateX(100%);
+        }
+
+        .door-transition.is-active {
+            pointer-events: auto;
+        }
+
+            .door-transition.is-active .door-left {
+                transform: translateX(0);
+            }
+
+            .door-transition.is-active .door-right {
+                transform: translateX(0);
+            }
+
+        @media (max-width: 900px) {
+            .profiles-grid {
+                gap: 20px;
+            }
+
+            .profile-card {
+                padding: 20px;
+            }
+
+            .preview-body {
+                min-height: 210px;
+                padding: 18px 18px 16px;
+            }
+
+            .contact-form-wrap {
+                padding: 26px 22px 24px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                background-attachment: scroll;
+            }
+
+            .hero {
+                min-height: 92vh;
+                padding: 32px 16px 24px;
+            }
+
+            .hero-top {
+                font-size: 16px;
+                letter-spacing: 0.10em;
+                margin-bottom: 12px;
+            }
+
+            .hero-title {
+                font-size: clamp(42px, 15vw, 74px);
+                letter-spacing: 0.06em;
+                margin-bottom: 12px;
+            }
+
+            .hero-bottom {
+                font-size: 14px;
+                max-width: 94%;
+            }
+
+            .profiles-section,
+            .contact-section {
+                padding: 18px 16px 48px;
+            }
+
+            .profiles-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .profile-name {
+                font-size: 32px;
+            }
+
+            .preview-brand {
+                font-size: 28px;
+            }
+
+            .preview-description {
+                max-width: 100%;
+                font-size: 13px;
+            }
+
+            .preview-body {
+                min-height: auto;
+            }
+
+            .checkbox-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .contact-form-wrap {
+                padding: 22px 16px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrap">
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-top">PALAZUELO CREATIVE STUDIO</div>
+                <h1 class="hero-title">DOUBLE B</h1>
+                <p class="hero-bottom">A multidisciplinary design studio focusing on every branch</p>
+            </div>
+        </section>
+
+        <section class="profiles-section">
+            <div class="profiles-inner">
+                <div class="profiles-grid">
+
+                    <a class="profile-card door-link" href="https://blancapalazuelo.com/">
+                        <div class="profile-role">Graphic and Motion Design</div>
+                        <div class="profile-name">BLANCA PALAZUELO</div>
+
+                        <div class="preview-widget">
+                            <div class="preview-topbar">
+                                <span class="preview-dot"></span>
+                                <span class="preview-dot"></span>
+                                <span class="preview-dot"></span>
+                                <div class="preview-url">blancapalazuelo.com</div>
+                            </div>
+
+                            <div class="preview-body">
+                                <div>
+                                    <div class="preview-brand">Visual worlds</div>
+                                    <p class="preview-description">
+                                        A refined, conceptual universe focused on graphic design, motion language,
+                                        visual storytelling and editorial sensitivity.
+                                    </p>
+                                </div>
+
+                                <div class="preview-footer">
+                                    <div class="preview-tag">Portfolio preview</div>
+                                    <div class="preview-enter">Enter</div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a class="profile-card door-link" href="https://beatrizpalazuelo.com/">
+                        <div class="profile-role">Marketing and Graphic Design</div>
+                        <div class="profile-name">BEATRIZ PALAZUELO</div>
+
+                        <div class="preview-widget">
+                            <div class="preview-topbar">
+                                <span class="preview-dot"></span>
+                                <span class="preview-dot"></span>
+                                <span class="preview-dot"></span>
+                                <div class="preview-url">beatrizpalazuelo.com</div>
+                            </div>
+
+                            <div class="preview-body">
+                                <div>
+                                    <div class="preview-brand">Strategy & design</div>
+                                    <p class="preview-description">
+                                        A profile combining communication, marketing thinking and graphic design
+                                        with a clean, contemporary and commercially aware approach.
+                                    </p>
+                                </div>
+
+                                <div class="preview-footer">
+                                    <div class="preview-tag">Portfolio preview</div>
+                                    <div class="preview-enter">Enter</div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="contact-section">
+            <div class="contact-inner">
+                <h2 class="section-title">Contact</h2>
+                <p class="section-subtitle">
+                    If you would like to collaborate, build a brand, develop a website or create a visual universe,
+                    send us a message.
+                </p>
+
+                <div class="contact-form-wrap">
+                    <form class="contact-form">
+                        <div class="form-row">
+                            <label class="form-label" for="name">Name</label>
+                            <input class="form-input" type="text" id="name" name="name" placeholder="Your name">
+                        </div>
+
+                        <div class="form-row">
+                            <label class="form-label" for="email">Email</label>
+                            <input class="form-input" type="email" id="email" name="email" placeholder="Your email">
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-label">What are you looking for</div>
+                            <div class="checkbox-grid">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="logo-design" name="services" value="Logo Design">
+                                    <label for="logo-design">Logo Design</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="branding" name="services" value="Branding">
+                                    <label for="branding">Branding</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="web-design" name="services" value="Web Design">
+                                    <label for="web-design">Web Design</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="web-development" name="services" value="Web development">
+                                    <label for="web-development">Web development</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="motion-graphics" name="services" value="Motion graphics">
+                                    <label for="motion-graphics">Motion graphics</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="animation-3d" name="services" value="3d animation">
+                                    <label for="animation-3d">3d animation</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="marketing-strategy" name="services" value="Marketing strategy">
+                                    <label for="marketing-strategy">Marketing strategy</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="illustration" name="services" value="Illustration">
+                                    <label for="illustration">Illustration</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <label class="form-label" for="message">Message</label>
+                            <textarea class="form-textarea" id="message" name="message" placeholder="Tell us about your project"></textarea>
+                        </div>
+
+                        <div class="submit-wrap">
+                            <button class="submit-btn" type="submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="door-transition" id="doorTransition" aria-hidden="true">
+        <div class="door-left"></div>
+        <div class="door-right"></div>
+    </div>
+
+    <script>
+        (function () {
+            const links = document.querySelectorAll('.door-link');
+            const transition = document.getElementById('doorTransition');
+
+            links.forEach(function (link) {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetUrl = link.getAttribute('href');
+
+                    transition.classList.add('is-active');
+
+                    setTimeout(function () {
+                        window.location.href = targetUrl;
+                    }, 650);
+                });
+            });
+        })();
+    </script>
+</body>
+</html>
