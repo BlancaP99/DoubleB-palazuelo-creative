@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8" />
@@ -27,6 +27,8 @@
             --card-shadow: 0 14px 40px rgba(36, 27, 70, 0.08);
             --field-bg: rgba(255, 255, 255, 0.42);
             --field-border: rgba(36, 27, 70, 0.24);
+            --success-bg: rgba(255, 255, 255, 0.55);
+            --success-border: rgba(36, 27, 70, 0.20);
         }
 
         * {
@@ -53,14 +55,14 @@
             position: relative;
         }
 
-            body::before {
-                content: "";
-                position: fixed;
-                inset: 0;
-                background: var(--overlay-white);
-                z-index: 0;
-                pointer-events: none;
-            }
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: var(--overlay-white);
+            z-index: 0;
+            pointer-events: none;
+        }
 
         .page-wrap {
             position: relative;
@@ -120,6 +122,14 @@
             padding: 40px 24px 80px;
         }
 
+        .profiles-section {
+            padding-bottom: 150px;
+        }
+
+        .contact-section {
+            padding-top: 30px;
+        }
+
         .profiles-inner,
         .contact-inner {
             width: 100%;
@@ -149,11 +159,11 @@
             overflow: hidden;
         }
 
-            .profile-card:hover {
-                transform: translateY(-4px);
-                box-shadow: 0 18px 48px rgba(36, 27, 70, 0.12);
-                background: rgba(255, 255, 255, 0.42);
-            }
+        .profile-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 18px 48px rgba(36, 27, 70, 0.12);
+            background: rgba(255, 255, 255, 0.42);
+        }
 
         .profile-role {
             font-family: 'Montserrat', sans-serif;
@@ -328,15 +338,15 @@
             box-shadow: none;
         }
 
-            .form-input::placeholder,
-            .form-textarea::placeholder {
-                color: rgba(36, 27, 70, 0.65);
-            }
+        .form-input::placeholder,
+        .form-textarea::placeholder {
+            color: rgba(36, 27, 70, 0.65);
+        }
 
-            .form-input:focus,
-            .form-textarea:focus {
-                border-color: var(--main-text);
-            }
+        .form-input:focus,
+        .form-textarea:focus {
+            border-color: var(--main-text);
+        }
 
         .form-textarea {
             min-height: 140px;
@@ -357,22 +367,22 @@
             gap: 10px;
         }
 
-            .checkbox-item input[type="checkbox"] {
-                margin-top: 2px;
-                accent-color: var(--main-text);
-                width: 15px;
-                height: 15px;
-                flex: 0 0 auto;
-            }
+        .checkbox-item input[type="checkbox"] {
+            margin-top: 2px;
+            accent-color: var(--main-text);
+            width: 15px;
+            height: 15px;
+            flex: 0 0 auto;
+        }
 
-            .checkbox-item label {
-                font-family: 'Montserrat', sans-serif;
-                font-size: 14px;
-                font-weight: 300;
-                line-height: 1.5;
-                color: var(--soft-text);
-                cursor: pointer;
-            }
+        .checkbox-item label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 300;
+            line-height: 1.5;
+            color: var(--soft-text);
+            cursor: pointer;
+        }
 
         .submit-wrap {
             display: flex;
@@ -391,19 +401,46 @@
             text-transform: uppercase;
             padding: 14px 28px;
             cursor: pointer;
-            transition: background 0.25s ease, transform 0.25s ease;
+            transition: background 0.25s ease, transform 0.25s ease, opacity 0.25s ease;
         }
 
-            .submit-btn:hover {
-                background: rgba(255, 255, 255, 0.62);
-                transform: translateY(-2px);
-            }
+        .submit-btn:hover {
+            background: rgba(255, 255, 255, 0.62);
+            transform: translateY(-2px);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.65;
+            cursor: wait;
+            transform: none;
+        }
+
+        .form-success,
+        .form-error {
+            display: none;
+            margin-top: 14px;
+            text-align: center;
+            padding: 14px 16px;
+            border: 1px solid var(--success-border);
+            background: var(--success-bg);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.6;
+            color: var(--main-text);
+        }
+
+        .form-success.is-visible,
+        .form-error.is-visible {
+            display: block;
+        }
 
         .door-transition {
             position: fixed;
             inset: 0;
             z-index: 9999;
             pointer-events: none;
+            overflow: hidden;
         }
 
         .door-left,
@@ -413,8 +450,8 @@
             width: 50%;
             height: 100%;
             background: rgba(36, 27, 70, 0.96);
-            transform: translateX(0);
-            transition: transform 0.7s ease;
+            transition: transform 0.85s cubic-bezier(0.77, 0, 0.18, 1);
+            will-change: transform;
         }
 
         .door-left {
@@ -431,13 +468,13 @@
             pointer-events: auto;
         }
 
-            .door-transition.is-active .door-left {
-                transform: translateX(0);
-            }
+        .door-transition.is-active .door-left {
+            transform: translateX(0);
+        }
 
-            .door-transition.is-active .door-right {
-                transform: translateX(0);
-            }
+        .door-transition.is-active .door-right {
+            transform: translateX(0);
+        }
 
         @media (max-width: 900px) {
             .profiles-grid {
@@ -455,6 +492,10 @@
 
             .contact-form-wrap {
                 padding: 26px 22px 24px;
+            }
+
+            .profiles-section {
+                padding-bottom: 120px;
             }
         }
 
@@ -487,7 +528,18 @@
 
             .profiles-section,
             .contact-section {
-                padding: 18px 16px 48px;
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .profiles-section {
+                padding-top: 18px;
+                padding-bottom: 90px;
+            }
+
+            .contact-section {
+                padding-top: 10px;
+                padding-bottom: 48px;
             }
 
             .profiles-grid {
@@ -608,15 +660,15 @@
                 </p>
 
                 <div class="contact-form-wrap">
-                    <form class="contact-form">
+                    <form class="contact-form" id="contactForm" action="https://formspree.io/f/xojpzzje" method="POST">
                         <div class="form-row">
                             <label class="form-label" for="name">Name</label>
-                            <input class="form-input" type="text" id="name" name="name" placeholder="Your name">
+                            <input class="form-input" type="text" id="name" name="name" placeholder="Your name" required>
                         </div>
 
                         <div class="form-row">
                             <label class="form-label" for="email">Email</label>
-                            <input class="form-input" type="email" id="email" name="email" placeholder="Your email">
+                            <input class="form-input" type="email" id="email" name="email" placeholder="Your email" required>
                         </div>
 
                         <div class="form-row">
@@ -659,12 +711,15 @@
 
                         <div class="form-row">
                             <label class="form-label" for="message">Message</label>
-                            <textarea class="form-textarea" id="message" name="message" placeholder="Tell us about your project"></textarea>
+                            <textarea class="form-textarea" id="message" name="message" placeholder="Tell us about your project" required></textarea>
                         </div>
 
                         <div class="submit-wrap">
-                            <button class="submit-btn" type="submit">Submit</button>
+                            <button class="submit-btn" id="submitBtn" type="submit">Submit</button>
                         </div>
+
+                        <div class="form-success" id="formSuccess">Thank you!</div>
+                        <div class="form-error" id="formError">Something went wrong. Please try again.</div>
                     </form>
                 </div>
             </div>
@@ -690,8 +745,50 @@
 
                     setTimeout(function () {
                         window.location.href = targetUrl;
-                    }, 650);
+                    }, 820);
                 });
+            });
+        })();
+
+        (function () {
+            const form = document.getElementById('contactForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const successBox = document.getElementById('formSuccess');
+            const errorBox = document.getElementById('formError');
+
+            if (!form) return;
+
+            form.addEventListener('submit', async function (e) {
+                e.preventDefault();
+
+                successBox.classList.remove('is-visible');
+                errorBox.classList.remove('is-visible');
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Sending...';
+
+                const formData = new FormData(form);
+
+                try {
+                    const response = await fetch(form.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+
+                    if (response.ok) {
+                        form.reset();
+                        successBox.classList.add('is-visible');
+                    } else {
+                        errorBox.classList.add('is-visible');
+                    }
+                } catch (error) {
+                    errorBox.classList.add('is-visible');
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Submit';
+                }
             });
         })();
     </script>
