@@ -99,8 +99,9 @@
         .hero-title {
             font-family: 'Calivorne', serif;
             font-size: clamp(58px, 9vw, 150px);
+            font-weight: 300;
             line-height: 0.92;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.10em;
             text-transform: uppercase;
             color: var(--main-text);
             margin-bottom: 18px;
@@ -435,47 +436,6 @@
             display: block;
         }
 
-        .door-transition {
-            position: fixed;
-            inset: 0;
-            z-index: 9999;
-            pointer-events: none;
-            overflow: hidden;
-        }
-
-        .door-left,
-        .door-right {
-            position: absolute;
-            top: 0;
-            width: 50%;
-            height: 100%;
-            background: rgba(36, 27, 70, 0.96);
-            transition: transform 0.85s cubic-bezier(0.77, 0, 0.18, 1);
-            will-change: transform;
-        }
-
-        .door-left {
-            left: 0;
-            transform: translateX(-100%);
-        }
-
-        .door-right {
-            right: 0;
-            transform: translateX(100%);
-        }
-
-        .door-transition.is-active {
-            pointer-events: auto;
-        }
-
-        .door-transition.is-active .door-left {
-            transform: translateX(0);
-        }
-
-        .door-transition.is-active .door-right {
-            transform: translateX(0);
-        }
-
         @media (max-width: 900px) {
             .profiles-grid {
                 gap: 20px;
@@ -517,7 +477,7 @@
 
             .hero-title {
                 font-size: clamp(42px, 15vw, 74px);
-                letter-spacing: 0.06em;
+                letter-spacing: 0.09em;
                 margin-bottom: 12px;
             }
 
@@ -589,7 +549,7 @@
             <div class="profiles-inner">
                 <div class="profiles-grid">
 
-                    <a class="profile-card door-link" href="https://blancapalazuelo.com/">
+                    <a class="profile-card" href="https://blancapalazuelo.com/" target="_blank" rel="noopener noreferrer">
                         <div class="profile-role">Graphic and Motion Design</div>
                         <div class="profile-name">BLANCA PALAZUELO</div>
 
@@ -618,7 +578,7 @@
                         </div>
                     </a>
 
-                    <a class="profile-card door-link" href="https://beatrizpalazuelo.com/">
+                    <a class="profile-card" href="https://beatrizpalazuelo.com/" target="_blank" rel="noopener noreferrer">
                         <div class="profile-role">Marketing and Graphic Design</div>
                         <div class="profile-name">BEATRIZ PALAZUELO</div>
 
@@ -726,30 +686,7 @@
         </section>
     </div>
 
-    <div class="door-transition" id="doorTransition" aria-hidden="true">
-        <div class="door-left"></div>
-        <div class="door-right"></div>
-    </div>
-
     <script>
-        (function () {
-            const links = document.querySelectorAll('.door-link');
-            const transition = document.getElementById('doorTransition');
-
-            links.forEach(function (link) {
-                link.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const targetUrl = link.getAttribute('href');
-
-                    transition.classList.add('is-active');
-
-                    setTimeout(function () {
-                        window.location.href = targetUrl;
-                    }, 820);
-                });
-            });
-        })();
-
         (function () {
             const form = document.getElementById('contactForm');
             const submitBtn = document.getElementById('submitBtn');
